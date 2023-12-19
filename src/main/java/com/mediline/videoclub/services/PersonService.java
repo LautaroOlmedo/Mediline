@@ -1,6 +1,6 @@
 package com.mediline.videoclub.services;
 
-import com.mediline.videoclub.entities.Person;
+import com.mediline.videoclub.entities.PersonEntity;
 
-public interface PersonService extends BaseService<Person, Integer>{
+public interface PersonService extends BaseService<PersonEntity, Integer>{
 }

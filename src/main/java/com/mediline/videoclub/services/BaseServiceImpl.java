@@ -1,9 +1,7 @@
 package com.mediline.videoclub.services;
 
 import com.mediline.videoclub.entities.BaseEntity;
-import com.mediline.videoclub.entities.Person;
 import com.mediline.videoclub.repositories.BaseRepository;
-import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;

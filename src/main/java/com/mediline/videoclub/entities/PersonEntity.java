@@ -4,7 +4,6 @@ package com.mediline.videoclub.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Reference;
 import org.springframework.data.redis.core.RedisHash;
 
@@ -15,10 +14,10 @@ import java.util.Set;
 
 
 @RedisHash("Person")
-public class Person extends BaseEntity implements Serializable {
+public class PersonEntity extends BaseEntity implements Serializable {
 
-    public Person(){}
-    public Person(String firstName, String lastName, Date birthdate, boolean hasInsurance) {
+    public PersonEntity(){}
+    public PersonEntity(String firstName, String lastName, Date birthdate, boolean hasInsurance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
