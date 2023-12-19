@@ -2,12 +2,15 @@ package com.mediline.videoclub.entities;
 
 
 
+import jakarta.persistence.GeneratedValue;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Reference;
 import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 import java.util.Date;
-
+import java.util.HashSet;
+import java.util.Set;
 
 
 @RedisHash("Person")
@@ -61,10 +64,21 @@ public class Person implements Serializable {
         this.hasInsurance = hasInsurance;
     }
 
+    public Set<Integer> getMovieIds() {
+        return movieIds;
+    }
+
+    public void setMovieIds(Integer movieIds) {
+        this.movieIds.add(movieIds);
+    }
+
     @Id
+    @GeneratedValue
     private Integer ID;
     private String firstName;
     private String lastName;
     private Date birthdate;
     private boolean hasInsurance;
+    @Reference
+    private Set<Integer> movieIds = new HashSet<>();
 }

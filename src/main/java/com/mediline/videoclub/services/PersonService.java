@@ -6,23 +6,19 @@ import com.mediline.videoclub.repositories.PersonRepository;
 import jakarta.transaction.Transactional;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 public class PersonService implements BaseService<Person>{
-
-    public PersonService(BaseRepository baseRepository){
-        this.baseRepository = baseRepository;
+    public PersonService(PersonRepository personRepository){
+        this.personRepository = personRepository;
     }
-
-
 
     @Override
     public List<Person> findAll() throws Exception {
-        try {
-            List<Person> persons = new ArrayList<>();
-            baseRepository.findAll().iterator().forEachRemaining(person -> persons.add((Person) person));
-            return persons;
+        try{
+            return (List<Person>) this.personRepository.findAll();
         }catch (Error e){
             throw new Exception(e.getMessage());
         }
@@ -33,15 +29,20 @@ public class PersonService implements BaseService<Person>{
         return null;
     }
 
+    @Override
+    public Person save(Person entity) throws Exception {
+        return null;
+    }
 
     @Override
-    @Transactional
-    public Person save(Person entity) throws Exception {
-        try{
-            return (Person) baseRepository.save(entity);
-        }catch (Error e){
-            throw new Exception(e.getMessage());
-        }
+    public Person update(Integer ID, Person entity) throws Exception {
+        return null;
     }
-    private BaseRepository baseRepository;
+
+    @Override
+    public boolean delete(Integer ID) throws Exception {
+        return false;
+    }
+
+    private PersonRepository personRepository;
 }
