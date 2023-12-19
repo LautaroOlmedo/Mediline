@@ -2,6 +2,7 @@ package com.mediline.videoclub.controller;
 
 import com.mediline.videoclub.entities.Person;
 import com.mediline.videoclub.repositories.PersonRepository;
+import com.mediline.videoclub.services.DTOs.PersonDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,10 +34,14 @@ public class PersonController {
     }
 
 
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody Person person){
+    @PostMapping("/create")
+    public ResponseEntity<?> save(@RequestBody PersonDTO person){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(personRepository.save(person));
+            Person newPerson = new Person();
+            newPerson.setFirstName(person.getFirstName());
+            newPerson.setLastName(person.getLastName());
+            newPerson.setBirthdate(person.getBirthdate());
+            return ResponseEntity.status(HttpStatus.OK).body(personRepository.save(newPerson));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.OK).body("{\"error\":\"Error. Please try later\"}");
@@ -44,7 +49,7 @@ public class PersonController {
     }
 
 
-   /* @PutMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Person person){
         try{
             return null;
@@ -52,7 +57,7 @@ public class PersonController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.OK).body("{\"error\":\"Error. Please try later\"}");
         }
-    }*/
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Integer id){

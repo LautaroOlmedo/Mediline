@@ -2,7 +2,8 @@ package com.mediline.videoclub.entities;
 
 
 
-import jakarta.persistence.GeneratedValue;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Reference;
 import org.springframework.data.redis.core.RedisHash;
@@ -14,7 +15,7 @@ import java.util.Set;
 
 
 @RedisHash("Person")
-public class Person implements Serializable {
+public class Person extends BaseEntity implements Serializable {
 
     public Person(){}
     public Person(String firstName, String lastName, Date birthdate, boolean hasInsurance) {
@@ -24,13 +25,7 @@ public class Person implements Serializable {
         this.hasInsurance = hasInsurance;
     }
 
-    public int getID() {
-        return ID;
-    }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -72,11 +67,10 @@ public class Person implements Serializable {
         this.movieIds.add(movieIds);
     }
 
-    @Id
-    @GeneratedValue
-    private Integer ID;
+
     private String firstName;
     private String lastName;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
     private Date birthdate;
     private boolean hasInsurance;
     @Reference
