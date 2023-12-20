@@ -31,10 +31,10 @@ public abstract class BaseControllerImpl <E extends BaseEntity, S extends BaseSe
 
 
     @PostMapping("/create")
-    public ResponseEntity<?> save(@RequestBody E person){
+    public ResponseEntity<?> save(@RequestBody E entity){
         try{
 
-            return ResponseEntity.status(HttpStatus.OK).body(service.save(person));
+            return ResponseEntity.status(HttpStatus.OK).body(service.save(entity));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.OK).body("{\"error\":\"Error. Please try later\"}");
@@ -43,7 +43,7 @@ public abstract class BaseControllerImpl <E extends BaseEntity, S extends BaseSe
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody PersonEntity personEntity){
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody E entity){
         try{
             return null;
         } catch (Exception e) {

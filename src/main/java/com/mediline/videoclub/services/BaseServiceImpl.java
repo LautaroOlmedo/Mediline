@@ -22,12 +22,20 @@ public abstract class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
 
     @Override
     public E findOne(ID id) throws Exception {
-        return null;
+        try{
+            return this.baseRepository.findById(id);
+        }catch (Error e){
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
     public E save(E entity) throws Exception {
-        return null;
+        try{
+            return this.baseRepository.save(entity);
+        }catch (Error e){
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override
@@ -37,7 +45,7 @@ public abstract class BaseServiceImpl<E extends BaseEntity, ID extends Serializa
 
     @Override
     public boolean delete(ID id) throws Exception {
-        return false;
+        return this.baseRepository.deleteById(id);
     }
 
     protected BaseRepository<E, ID> baseRepository;
